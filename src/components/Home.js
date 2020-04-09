@@ -7,7 +7,9 @@ function Home() {
     return (
         <div>
             <Navbar />
-            <FrontPageBody />
+            <div className="jumbotron vertical-center">
+                <FrontPageBody />
+            </div>
         </div>
     )
 }
