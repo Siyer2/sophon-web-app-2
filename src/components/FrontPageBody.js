@@ -11,8 +11,14 @@ function FrontPageBody() {
                         <button type="button" className="btn btn-secondary">Download Windows Application</button>
                     </div>
                 </div>
-                <div class="col">
-                    2 of 2
+                <div className="col">
+                    <h3> Sign up for Pilot Program </h3>
+                    <div className="input-group mb-3">
+                        <input type="email" className="form-control" placeholder="Email" />
+                        <div className="input-group-append">
+                            <button className="btn btn-outline-secondary" type="button" id="button-addon2">Submit</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
