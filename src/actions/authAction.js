@@ -23,6 +23,12 @@ function failedLogin(error) {
     }
 }
 
+function clearUser() {
+    return {
+        type: 'CLEAR_USER'
+    }
+}
+
 //==== User Requests ====//
 export function login(email, password) {
     return function(dispatch) {
@@ -61,5 +67,8 @@ export function login(email, password) {
 }
 
 export function logout() {
-    localStorage.removeItem('user');
+    return function(dispatch) {
+        localStorage.removeItem('user');
+        dispatch(clearUser());
+    }
 }

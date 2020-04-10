@@ -11,6 +11,7 @@ function handleChange(event, name) {
 }
 
 function NavBar(props) {
+    console.log(props.auth)
     function loginClicked() {
         props.login(state.email, state.password);
     }
@@ -33,11 +34,12 @@ function NavBar(props) {
                 sophon
             </a>
 
+            {!props.auth.user._id && 
             <div className="justify-content-end form-inline col">
                 <input onChange={(e) => { handleChange(e, 'email') }} className="form-control mr-sm-2" type="email" placeholder="Email" />
                 <input onChange={(e) => { handleChange(e, 'password') }} className="form-control mr-sm-2" type="password" placeholder="Password" />
                 <SubmitButton />
-            </div>
+            </div>}
         </nav>
     )
 }

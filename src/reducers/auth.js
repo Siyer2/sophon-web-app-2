@@ -24,6 +24,12 @@ const auth = (state = initialState, action) => {
                 state,
                 { isLoggingIn: false, error: action.error }
             )
+        case 'CLEAR_USER':
+            return Object.assign(
+                {},
+                state,
+                { user: {} }
+            )
         default:
             return state;
     }

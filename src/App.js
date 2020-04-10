@@ -2,7 +2,7 @@ import React from 'react';
 import './bootstrap.min.css';
 import './App.css';
 import Home from './components/Home';
-import ExamList from './components/ExamList';
+import LecturerView from './components/LecturerView';
 import { Router, Route, Switch, Redirect } from 'react-router-dom';
 import { PrivateRoute } from './routes/PrivateRoute';
 import { history } from './helpers/history';
@@ -12,7 +12,7 @@ function App() {
     <div className="App">
       <Router history={history}>
         <Switch>
-          <PrivateRoute exact path="/exams" component={ExamList} />
+          <PrivateRoute exact path="/exams" component={LecturerView} />
           <Route path="/" component={Home} />
           <Redirect from="*" to="/" />
         </Switch>
