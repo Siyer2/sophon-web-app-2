@@ -1,3 +1,4 @@
+import { history } from '../helpers/history';
 import config from '../config';
 const api = config.API;
 
@@ -50,7 +51,8 @@ export function login(email, password) {
                 }
                 else {
                     dispatch(finishLogin(json));
-                    // TODO: set token to json.token
+                    localStorage.setItem('user', JSON.stringify(json.user));
+                    history.push('/exams');
                 }
             }
         )

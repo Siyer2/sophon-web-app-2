@@ -18,7 +18,7 @@ function NavBar(props) {
     function SubmitButton() {
         return (
             <button onClick={() => { loginClicked() }} className="btn btn-outline-success my-2 my-sm-0" type="submit">
-                {props.auth.isFetching ? 
+                {props.auth.isLoggingIn ? 
                 <div className="spinner-border" role="status">
                     <span className="sr-only">Loading...</span>
                 </div>

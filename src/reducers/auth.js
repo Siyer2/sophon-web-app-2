@@ -1,5 +1,5 @@
 const initialState = {
-    isFetching: false,
+    isLoggingIn: false,
     user: {}, 
     error: ''
 }
@@ -10,19 +10,19 @@ const auth = (state = initialState, action) => {
             return Object.assign(
                 {},
                 state,
-                { isFetching: true, error: '' }
+                { isLoggingIn: true, error: '' }
             )
         case 'FINISH_LOGIN':
             return Object.assign(
                 {},
                 state,
-                { isFetching: false, user: action.user }
+                { isLoggingIn: false, user: action.user }
             )
         case 'FAILED_LOGIN':
             return Object.assign(
                 {},
                 state,
-                { isFetching: false, error: action.error }
+                { isLoggingIn: false, error: action.error }
             )
         default:
             return state;
