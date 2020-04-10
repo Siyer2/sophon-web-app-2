@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 //==== Action Creators ====//
 function requestLogin() {
     return {
@@ -17,6 +19,23 @@ export function login(email, password) {
     return function(dispatch) {
         dispatch(requestLogin);
 
-        
+        return axios({
+            method: 'post', 
+            url: 'localhost:5902/login', 
+            data: {
+                email: "iyersyam21@gmail.com", 
+                password: "hello"
+            }
+        })
+        .then(
+            response => response.json(), 
+            error => console.log("error logging in", error)
+        )
+        .then(
+            json => {
+                dispatch(finishLogin(json));
+                // set token to json.token
+            }
+        )
     }
 }
