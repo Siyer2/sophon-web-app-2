@@ -58,3 +58,7 @@ export function login(email, password) {
         )
     }
 }
+
+export function logout() {
+    localStorage.removeItem('user');
+}
