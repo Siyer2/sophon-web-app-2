@@ -1,29 +1,15 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
 
-import { logout } from '../actions/authAction';
 import NavBar from '../components/NavBar';
+import ExamList from '../components/ExamList';
 
 function LecturerView(props) {
     return (
         <div>
             <NavBar />
-            <Link to="/" onClick={() => props.logout()}>
-                <button type="button" className="btn btn-primary">
-                    Logout
-                </button>
-            </Link>
+            <ExamList />
         </div>
     )
 }
 
-const mapDispatchToProps = dispatch => {
-    return {
-        logout: () => {
-            dispatch(logout())
-        }
-    }
-}
-
-export default connect(null, mapDispatchToProps)(LecturerView);
+export default LecturerView;

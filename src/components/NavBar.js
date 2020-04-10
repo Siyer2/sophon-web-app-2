@@ -1,7 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import {
-    login
+    login, 
+    logout
 } from '../actions/authAction';
 
 var state = {};
@@ -11,7 +13,6 @@ function handleChange(event, name) {
 }
 
 function NavBar(props) {
-    console.log(props.auth)
     function loginClicked() {
         props.login(state.email, state.password);
     }
@@ -30,11 +31,17 @@ function NavBar(props) {
 
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
-            <a href="localhost:3000" className="navbar-brand">
+            <a href={props.auth.user._id ? '/exams' : '/'} className="navbar-brand">
                 sophon
             </a>
 
-            {!props.auth.user._id && 
+            {props.auth.user._id ?
+            <Link className="justify-content-end form-inline col" to="/" onClick={() => props.logout()}>
+                <button type="button" className="btn btn-primary">
+                    Logout
+            </button>
+            </Link>
+            :
             <div className="justify-content-end form-inline col">
                 <input onChange={(e) => { handleChange(e, 'email') }} className="form-control mr-sm-2" type="email" placeholder="Email" />
                 <input onChange={(e) => { handleChange(e, 'password') }} className="form-control mr-sm-2" type="password" placeholder="Password" />
@@ -54,6 +61,9 @@ const mapDispatchToProps = dispatch => {
     return {
         login: (email, password) => {
             dispatch(login(email, password))
+        }, 
+        logout: () => {
+            dispatch(logout())
         }
     }
 }
