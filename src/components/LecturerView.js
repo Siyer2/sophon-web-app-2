@@ -7,7 +7,9 @@ function LecturerView(props) {
     return (
         <div>
             <NavBar />
-            <ExamList />
+            <div className="container">
+                <ExamList />
+            </div>
         </div>
     )
 }
