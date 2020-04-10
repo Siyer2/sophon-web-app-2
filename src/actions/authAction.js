@@ -23,8 +23,8 @@ export function login(email, password) {
             method: 'post', 
             url: 'localhost:5902/login', 
             data: {
-                email: "iyersyam21@gmail.com", 
-                password: "hello"
+                email,
+                password
             }
         })
         .then(

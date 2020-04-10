@@ -10,6 +10,8 @@ import rootReducer from './reducers';
 import thunkMiddleware from 'redux-thunk';
 import { createLogger } from 'redux-logger';
 
+import { login } from './actions/authAction';
+
 const loggerMiddleware = createLogger();
 const store = createStore(
   rootReducer,
@@ -18,6 +20,10 @@ const store = createStore(
     loggerMiddleware
   ),
 );
+
+//==== TESTING ====//
+store.dispatch(login("iyersyam@gmail.com", "hello")).then(() => console.log(store.getState()));
+//==== END TESTING ====//
 
 ReactDOM.render(
   <React.StrictMode>
