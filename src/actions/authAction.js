@@ -1,4 +1,6 @@
-import axios from 'axios';
+import config from '../config';
+const api = config.API;
+
 
 //==== Action Creators ====//
 function requestLogin() {
@@ -19,9 +21,9 @@ export function login(email, password) {
     return function(dispatch) {
         dispatch(requestLogin());
 
-        return axios({
+        return api({
             method: 'post', 
-            url: 'http://localhost:5902/login', 
+            url: '/login', 
             data: {
                 email,
                 password
