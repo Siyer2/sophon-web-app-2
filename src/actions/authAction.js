@@ -51,6 +51,7 @@ export function login(email, password) {
                 }
                 else {
                     dispatch(finishLogin(json));
+                    json.user.token = json.token;
                     localStorage.setItem('user', JSON.stringify(json.user));
                     history.push('/exams');
                 }
