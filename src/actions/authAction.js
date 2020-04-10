@@ -41,7 +41,6 @@ export function login(email, password) {
             }, 
             error => {
                 console.log("error logging in", error);
-                // TODO: create a failed login action creator
             }
         )
         .then(
