@@ -1,7 +1,6 @@
 import config from '../config';
 const api = config.API;
 
-
 //==== Action Creators ====//
 function requestLogin() {
     return {
@@ -13,6 +12,13 @@ function finishLogin(data) {
     return {
         type: 'FINISH_LOGIN', 
         user: data.user
+    }
+}
+
+function failedLogin(error) {
+    return {
+        type: 'FAILED_LOGIN', 
+        error
     }
 }
 
@@ -30,7 +36,9 @@ export function login(email, password) {
             }
         })
         .then(
-            response => response.data, 
+            response => {
+                return response.data;
+            }, 
             error => {
                 console.log("error logging in", error);
                 // TODO: create a failed login action creator
@@ -38,8 +46,13 @@ export function login(email, password) {
         )
         .then(
             json => {
-                dispatch(finishLogin(json));
-                // TODO: set token to json.token
+                if (json.error) {
+                    dispatch(failedLogin(json.error));
+                }
+                else {
+                    dispatch(finishLogin(json));
+                    // TODO: set token to json.token
+                }
             }
         )
     }
