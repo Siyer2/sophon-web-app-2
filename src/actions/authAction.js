@@ -47,6 +47,7 @@ export function login(email, password) {
         })
         .then(
             response => {
+                console.log("response", response);
                 return response.data;
             }, 
             error => {
@@ -55,8 +56,8 @@ export function login(email, password) {
         )
         .then(
             json => {
-                if (json.error) {
-                    dispatch(failedLogin(json.error));
+                if (json.error || !json.user) {
+                    dispatch(failedLogin(json.error ? json.error : 'Unknown Error'));
                 }
                 else {
                     dispatch(finishLogin(json));

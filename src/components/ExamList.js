@@ -7,7 +7,7 @@ function ExamList(props) {
             <tr key={item._id + item.examCode} onClick={() => { console.log("clicked") }}>
                 <th scope="row">{item.examName}</th>
                 <td>{item.examCode}</td>
-                <td>{item.time}</td>
+                <td>{item.isClosed ? "❌" : "✅"}</td>
                 <td>DELETE</td>
             </tr>
         )
