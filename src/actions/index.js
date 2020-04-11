@@ -1,4 +1,5 @@
 import { reloadUser } from './authAction';
+import { reloadExams } from './examAction';
 
 //==== User Requests ====//
 export function reload(pathname) {
@@ -6,6 +7,7 @@ export function reload(pathname) {
         switch (pathname) {
             case "/exams":
                 dispatch(reloadUser());
+                dispatch(reloadExams());
                 break;
         
             default:

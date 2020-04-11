@@ -49,3 +49,9 @@ export function getExamList() {
         )
     }
 }
+
+export function reloadExams() {
+    return function(dispatch) {
+        dispatch(getExamList());
+    }
+}
