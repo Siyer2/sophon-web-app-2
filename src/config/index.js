@@ -19,8 +19,7 @@ else {
 //==== Helper Functions ====//
 function createAxiosInstance(baseURL) {
     const instance = axios.create({
-        baseURL: baseURL, 
-        timeout: 1000
+        baseURL: baseURL
     });
 
     return instance;
