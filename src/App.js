@@ -8,6 +8,15 @@ import { PrivateRoute } from './routes/PrivateRoute';
 import { history } from './helpers/history';
 
 function App() {
+  if (window.performance) {
+    if (performance.navigation.type === 1) {
+      console.log("This page is reloaded");
+      console.log(window.location.pathname)
+    } else {
+      console.log("This page is not reloaded");
+    }
+  }
+
   return (
     <div className="App">
       <Router history={history}>

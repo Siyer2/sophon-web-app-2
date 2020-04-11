@@ -5,6 +5,7 @@ import {
     login, 
     logout
 } from '../actions/authAction';
+import { userExists } from '../helpers/userExists';
 
 var state = {};
 
@@ -31,11 +32,11 @@ function NavBar(props) {
 
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
-            <a href={props.auth.user._id ? '/exams' : '/'} className="navbar-brand">
+            <a href={userExists() ? '/exams' : '/'} className="navbar-brand">
                 sophon
             </a>
 
-            {props.auth.user._id ?
+            {userExists() ?
             <Link className="justify-content-end form-inline col" to="/" onClick={() => props.logout()}>
                 <button type="button" className="btn btn-primary">
                     Logout
