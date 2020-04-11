@@ -36,7 +36,8 @@ function NavBar(props) {
                 sophon
             </a>
 
-            {userExists() ?
+            {userExists() && window.location.pathname !== '/'
+            ?
             <Link className="justify-content-end form-inline col" to="/" onClick={() => props.logout()}>
                 <button type="button" className="btn btn-primary">
                     Logout

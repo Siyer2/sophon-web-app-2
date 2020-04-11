@@ -37,7 +37,7 @@ export function login(email, password) {
 
         return api({
             method: 'post', 
-            url: '/login', 
+            url: '/auth/login', 
             data: {
                 email,
                 password
@@ -53,6 +53,7 @@ export function login(email, password) {
         )
         .then(
             json => {
+                console.log("JSON", json);
                 if (json.error) {
                     dispatch(failedLogin(json.error));
                 }

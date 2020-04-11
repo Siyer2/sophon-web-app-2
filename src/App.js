@@ -11,13 +11,8 @@ import { userExists } from './helpers/userExists';
 import { reload } from './actions/';
 
 function App(props) {
-  if (window.performance) {
-    if (performance.navigation.type === 1 && userExists()) {
-      console.log("reloading...");
-      props.reload(window.location.pathname);
-    } else {
-      console.log("This page is not reloaded");
-    }
+  if (window.performance && userExists()) {
+    props.reload(window.location.pathname);
   }
 
   return (
