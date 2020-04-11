@@ -72,3 +72,10 @@ export function logout() {
         dispatch(clearUser());
     }
 }
+
+export function reloadUser() {
+    return function(dispatch) {
+        let user = JSON.parse(localStorage.getItem('user'));
+        dispatch(finishLogin({ user }));
+    }
+}
