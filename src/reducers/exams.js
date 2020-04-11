@@ -24,6 +24,12 @@ const auth = (state = initialState, action) => {
                 state,
                 { isFetching: false, error: action.error }
             )
+        case 'CLEAR_EXAMS':
+            return Object.assign(
+                {},
+                state,
+                { exams: [] }
+            )
         default:
             return state;
     }

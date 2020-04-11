@@ -1,5 +1,6 @@
 import { history } from '../helpers/history';
-import { getExamList } from './examAction';
+import { authHeader } from '../helpers/authHeader';
+import { clearExams, getExamList } from './examAction';
 import config from '../config';
 const api = config.API;
 
@@ -41,7 +42,8 @@ export function login(email, password) {
             data: {
                 email,
                 password
-            }
+            }, 
+            headers: authHeader()
         })
         .then(
             response => {
@@ -53,7 +55,6 @@ export function login(email, password) {
         )
         .then(
             json => {
-                console.log("JSON", json);
                 if (json.error) {
                     dispatch(failedLogin(json.error));
                 }
@@ -73,6 +74,7 @@ export function logout() {
     return function(dispatch) {
         localStorage.removeItem('user');
         dispatch(clearUser());
+        dispatch(clearExams());
     }
 }
 

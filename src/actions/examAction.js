@@ -1,4 +1,5 @@
 import config from '../config';
+import { authHeader } from '../helpers/authHeader';
 const api = config.API;
 
 //==== Action Creators ====//
@@ -21,13 +22,20 @@ function failedReceivingExams() {
     }
 }
 
+function clearExamList() {
+    return {
+        type: 'CLEAR_EXAMS'
+    }
+}
+
 //==== User Requests ====//
 export function getExamList() {
     return function(dispatch) {
         dispatch(fetchingExams());
         return api({
             method: 'get', 
-            url: '/exam/list'
+            url: '/exam/list', 
+            headers: authHeader()
         })
         .then(
             response => {
@@ -47,6 +55,12 @@ export function getExamList() {
                 }
             }
         )
+    }
+}
+
+export function clearExams() {
+    return function(dispatch) {
+        dispatch(clearExamList());
     }
 }
 

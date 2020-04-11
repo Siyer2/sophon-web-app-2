@@ -36,11 +36,11 @@ const mapStateToProps = state => {
     };
 };
 
+/*
 const mapDispatchToProps = dispatch => {
     return {
-        
     }
 }
+*/
 
-
-export default connect(mapStateToProps, mapDispatchToProps)(ExamList);
+export default connect(mapStateToProps, null)(ExamList);
