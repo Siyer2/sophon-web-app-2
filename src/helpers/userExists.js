@@ -1,3 +1,4 @@
+import { history } from '../helpers/history';
 import config from '../config';
 const api = config.API;
 
@@ -12,11 +13,18 @@ export function userExists() {
         })
         .then(
             response => {
-                return response.status === 200 ? true : false;
+                if (response.status === 200) {
+                    return true;
+                }
+                else {
+                    redirectToHome();
+                    return false;
+                }
             }
         )
         .catch(
             () => {
+                redirectToHome();
                 return false;
             }
         )
@@ -24,4 +32,8 @@ export function userExists() {
     else {
         return false;
     }
+}
+
+function redirectToHome() {
+    history.push('/');
 }
