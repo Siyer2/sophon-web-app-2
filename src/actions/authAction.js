@@ -1,4 +1,5 @@
 import { history } from '../helpers/history';
+import { getExamList } from './examAction';
 import config from '../config';
 const api = config.API;
 
@@ -59,6 +60,7 @@ export function login(email, password) {
                     dispatch(finishLogin(json));
                     json.user.token = json.token;
                     localStorage.setItem('user', JSON.stringify(json.user));
+                    dispatch(getExamList());
                     history.push('/exams');
                 }
             }
