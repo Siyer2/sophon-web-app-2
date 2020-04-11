@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { authHeader } from '../helpers/authHeader';
 
 let config = {
     
@@ -18,9 +19,11 @@ else {
 
 //==== Helper Functions ====//
 function createAxiosInstance(baseURL) {
+    const header = authHeader();
     const instance = axios.create({
         baseURL: baseURL, 
-        timeout: 1000
+        timeout: 1000, 
+        ...header && { headers: header }
     });
 
     return instance;

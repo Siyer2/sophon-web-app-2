@@ -6,12 +6,17 @@ import LecturerView from './components/LecturerView';
 import { Router, Route, Switch, Redirect } from 'react-router-dom';
 import { PrivateRoute } from './routes/PrivateRoute';
 import { history } from './helpers/history';
+import { userExists } from './helpers/userExists';
 
 function App() {
   if (window.performance) {
     if (performance.navigation.type === 1) {
-      console.log("This page is reloaded");
-      console.log(window.location.pathname)
+      if (userExists()) {
+        console.log("reload", window.location.pathname);
+      }
+      else {
+        console.log("chill", window.location.pathname);
+      }
     } else {
       console.log("This page is not reloaded");
     }
