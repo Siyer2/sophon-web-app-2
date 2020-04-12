@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal } from 'react-bootstrap';
+import { Modal, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
 import Navbar from './NavBar';
@@ -11,11 +11,7 @@ function Home(props) {
         return (
             <Modal show={props.auth.error ? true : false} onHide={() => props.clearError()}>
                 <Modal.Body>{props.auth.error}</Modal.Body>
-                <Modal.Footer>
-                    <button variant="secondary" onClick={() => props.clearError()}>
-                        Close
-                    </button>
-                </Modal.Footer>
+                <Button onClick={() => props.clearError()}>Close</Button>
             </Modal>
         )
     }
