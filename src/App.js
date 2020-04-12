@@ -3,7 +3,7 @@ import './bootstrap.min.css';
 import './App.css';
 import Home from './components/Home';
 import LecturerView from './components/LecturerView';
-import StudentList from './components/StudentList';
+import ExamView from './components/ExamView';
 import { Router, Route, Switch, Redirect } from 'react-router-dom';
 import { PrivateRoute } from './routes/PrivateRoute';
 import { connect } from 'react-redux';
@@ -21,7 +21,7 @@ function App(props) {
       <Router history={history}>
         <Switch>
           <PrivateRoute exact path="/exams" component={LecturerView} />
-          <PrivateRoute exact path="/exams/:id" component={StudentList} />
+          <PrivateRoute exact path="/exams/:id" component={ExamView} />
           <Route path="/" component={Home} />
           <Redirect from="*" to="/" />
         </Switch>
