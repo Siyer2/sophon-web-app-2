@@ -30,6 +30,12 @@ const auth = (state = initialState, action) => {
                 state,
                 { user: {} }
             )
+        case 'CLEAR_AUTH_ERROR':
+            return Object.assign(
+                {},
+                state,
+                { error: '' }
+            )
         default:
             return state;
     }

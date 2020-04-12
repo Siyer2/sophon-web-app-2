@@ -31,6 +31,12 @@ function clearUser() {
     }
 }
 
+function clearAuthError() {
+    return {
+        type: 'CLEAR_AUTH_ERROR'
+    }
+}
+
 //==== User Requests ====//
 export function login(email, password) {
     return function(dispatch) {
@@ -47,7 +53,6 @@ export function login(email, password) {
         })
         .then(
             response => {
-                console.log("response", response);
                 return response.data;
             }, 
             error => {
@@ -82,6 +87,12 @@ export function logout() {
         localStorage.removeItem('user');
         dispatch(clearUser());
         dispatch(clearExams());
+    }
+}
+
+export function clearError() {
+    return function(dispatch) {
+        dispatch(clearAuthError());
     }
 }
 
