@@ -55,6 +55,12 @@ export function getExamList() {
                 }
             }
         )
+        .catch(
+            error => {
+                console.log("error", error);
+                dispatch(failedReceivingExams(error));
+            }
+        )
     }
 }
 

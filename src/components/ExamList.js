@@ -1,9 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { getStudentList } from '../actions/studentAction';
+import { history } from '../helpers/history';
 
 function ExamList(props) {
     function examClicked(examId) {
-        console.log("clicked", examId);
+        props.getStudentList(examId);
+        history.push(`exams/${examId}`);
     }
 
     const exams = props.exams.exams && props.exams.exams.length > 0 && props.exams.exams.map((item) => {
@@ -40,11 +43,12 @@ const mapStateToProps = state => {
     };
 };
 
-/*
 const mapDispatchToProps = dispatch => {
     return {
+        getStudentList: (examId) => {
+            dispatch(getStudentList(examId))
+        }, 
     }
 }
-*/
 
-export default connect(mapStateToProps, null)(ExamList);
+export default connect(mapStateToProps, mapDispatchToProps)(ExamList);
