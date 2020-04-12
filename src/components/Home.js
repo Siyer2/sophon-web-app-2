@@ -6,33 +6,19 @@ import Navbar from './NavBar';
 import FrontPageBody from './FrontPageBody';
 import { clearError } from '../actions/authAction';
 
-var state = {
-    error: ''
-}
-
 function Home(props) {
-    function resetError() {
-        props.clearError();
-        state.error = "";
-    }
-
-    if (props.auth.error) {
-        state.error = props.auth.error;
-    }
-
     function ErrorModal() {
         return (
-            <Modal show={state.error ? true : false} onHide={() => resetError()}>
+            <Modal show={props.auth.error ? true : false} onHide={() => props.clearError()}>
                 <Modal.Body>{props.auth.error}</Modal.Body>
                 <Modal.Footer>
-                    <button variant="secondary" onClick={() => resetError()}>
+                    <button variant="secondary" onClick={() => props.clearError()}>
                         Close
                     </button>
                 </Modal.Footer>
             </Modal>
         )
     }
-
 
     return (
         <div>
