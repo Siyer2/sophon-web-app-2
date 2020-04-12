@@ -34,7 +34,7 @@ function NavBar(props) {
         }
         else if (examId && examId !== '/') {
             return (
-                <div className="justify-content-end form-inline col">
+                <div className="text-white justify-content-end form-inline col">
                     <h6>
                         {props.exams.exams.length && _.find(props.exams.exams, { _id: examId }).examName}
                     </h6>
