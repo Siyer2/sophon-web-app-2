@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { getStudentList } from '../actions/studentAction';
 import { history } from '../helpers/history';
+import { Button } from 'react-bootstrap';
 
 function ExamList(props) {
     function examClicked(examId) {
@@ -15,12 +16,21 @@ function ExamList(props) {
                 <th scope="row">{item.examName}</th>
                 <td>{item.examCode}</td>
                 <td>{item.isClosed ? "❌" : "✅"}</td>
-                <td>DELETE</td>
+                <td>
+                    <Button>
+                        Delete
+                    </Button>
+                </td>
             </tr>
         )
     });
 
     return (
+        props.exams.isFetching ? 
+        <div className="spinner-border" role="status">
+            <span className="sr-only">Loading...</span>
+        </div>
+        :
         <table className="table table-hover">
             <thead className="thead">
                 <tr>

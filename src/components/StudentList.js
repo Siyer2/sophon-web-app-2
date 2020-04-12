@@ -11,7 +11,7 @@ function StudentList(props) {
                 <td>{item.startTime}</td>
                 <td>
                     <Button>
-                        {"Download"}
+                        Download
                     </Button>
                 </td>
             </tr>
@@ -19,6 +19,11 @@ function StudentList(props) {
     });
 
     return (
+        props.students.isFetching ?
+        <div className="spinner-border" role="status">
+            <span className="sr-only">Loading...</span>
+        </div>
+        :
         <table className="table">
             <thead className="thead">
                 <tr>
