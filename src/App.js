@@ -20,6 +20,7 @@ function App(props) {
       <Router history={history}>
         <Switch>
           <PrivateRoute exact path="/exams" component={LecturerView} />
+          <PrivateRoute exact path="/exams/:id" component={LecturerView} />
           <Route path="/" component={Home} />
           <Redirect from="*" to="/" />
         </Switch>

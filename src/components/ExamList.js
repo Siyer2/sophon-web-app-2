@@ -4,14 +4,14 @@ import { getStudentList } from '../actions/studentAction';
 import { history } from '../helpers/history';
 
 function ExamList(props) {
-    function examClicked(examId) {
+    function examClicked(examId, examCode) {
         props.getStudentList(examId);
-        history.push(`exams/${examId}`);
+        history.push(`exams/${examCode}`);
     }
 
     const exams = props.exams.exams && props.exams.exams.length > 0 && props.exams.exams.map((item) => {
         return (
-            <tr key={item._id + item.examCode} onClick={() => { examClicked(item._id) }}>
+            <tr key={item._id + item.examCode} onClick={() => { examClicked(item._id, item.examCode) }}>
                 <th scope="row">{item.examName}</th>
                 <td>{item.examCode}</td>
                 <td>{item.isClosed ? "❌" : "✅"}</td>
