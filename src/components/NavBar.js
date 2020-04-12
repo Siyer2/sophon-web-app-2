@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import _ from 'lodash';
 import {
     login, 
     logout
@@ -16,6 +17,33 @@ function handleChange(event, name) {
 function NavBar(props) {
     function loginClicked() {
         props.login(state.email, state.password);
+    }
+
+    function NavBarHeading() {
+        const pathname = window.location.pathname;
+        const examId = pathname.split("/exams/").pop();
+
+        if (pathname === '/exams') {
+            return (
+                <div className="justify-content-end form-inline col">
+                    <button type="button" className="btn btn-success my-2 my-sm-0">
+                        New Exam
+                    </button>
+                </div>
+            )
+        }
+        else if (examId && examId !== '/') {
+            return (
+                <div className="justify-content-end form-inline col">
+                    <h6>
+                        {props.exams.exams.length && _.find(props.exams.exams, { _id: examId }).examName}
+                    </h6>
+                </div>
+            )
+        }
+        else {
+            return null;
+        }
     }
 
     function SubmitButton() {
@@ -36,11 +64,7 @@ function NavBar(props) {
                 sophon
             </a>
 
-            <div className="justify-content-end form-inline col">
-                <button type="button" className="btn btn-success my-2 my-sm-0">
-                    New Exam
-                </button>
-            </div>
+            <NavBarHeading />
 
             {userExists() && window.location.pathname !== '/'
             ?
@@ -61,7 +85,8 @@ function NavBar(props) {
 
 const mapStateToProps = state => {
     return {
-        auth: state.auth
+        auth: state.auth, 
+        exams: state.exams
     };
 };
 

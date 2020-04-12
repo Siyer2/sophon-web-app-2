@@ -8,6 +8,8 @@ export function reload(pathname) {
     return function(dispatch) {
         const examId = pathname.split("/exams/").pop();
         if (examId) {
+            dispatch(reloadUser());
+            dispatch(reloadExams());
             dispatch(reloadStudents(pathname.split("/exams/").pop()));
         }
 
