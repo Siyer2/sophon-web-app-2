@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Button } from 'react-bootstrap';
 
 function StudentList(props) {
     const exams = props.students.students && props.students.students.length > 0 && props.students.students.map((item) => {
@@ -8,7 +9,11 @@ function StudentList(props) {
                 <th scope="row">{item.studentId}</th>
                 <td>{item.examCode}</td>
                 <td>{item.startTime}</td>
-                <td>DL</td>
+                <td>
+                    <Button>
+                        {"Download"}
+                    </Button>
+                </td>
             </tr>
         )
     });
