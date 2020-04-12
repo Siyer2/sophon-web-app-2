@@ -1,13 +1,14 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 function StudentList(props) {
-    const exams = false && props.exams.exams && props.exams.exams.length > 0 && props.exams.exams.map((item) => {
+    const exams = props.students.students && props.students.students.length > 0 && props.students.students.map((item) => {
         return (
-            <tr key={item._id + item.examCode}>
-                <th scope="row">{item.examName}</th>
+            <tr key={item._id}>
+                <th scope="row">{item.studentId}</th>
                 <td>{item.examCode}</td>
-                <td>{item.isClosed ? "❌" : "✅"}</td>
-                <td>DELETE</td>
+                <td>{item.startTime}</td>
+                <td>DL</td>
             </tr>
         )
     });
@@ -29,4 +30,20 @@ function StudentList(props) {
     )
 }
 
-export default StudentList;
+const mapStateToProps = state => {
+    return {
+        students: state.students
+    };
+};
+
+/*
+const mapDispatchToProps = dispatch => {
+    return {
+        getStudentList: (examId) => {
+            dispatch(getStudentList(examId))
+        },
+    }
+}
+*/
+
+export default connect(mapStateToProps, null)(StudentList);

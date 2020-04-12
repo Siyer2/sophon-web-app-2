@@ -54,7 +54,6 @@ export function getStudentList(examId) {
         )
         .catch(
             error => {
-                console.log("error", error);
                 dispatch(failedReceivingStudentList(error));
             }
         )
