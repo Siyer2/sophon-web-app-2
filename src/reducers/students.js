@@ -1,38 +1,33 @@
 const initialState = {
-    isFetching: false,
-    exams: [],
+    isFetching: false, 
+    students: [], 
     error: ''
 }
 
-const exams = (state = initialState, action) => {
+const students = (state = initialState, action) => {
     switch (action.type) {
-        case 'FETCHING_EXAMS':
+        case 'FETCHING_STUDENT_LIST':
             return Object.assign(
                 {},
                 state,
                 { isFetching: true, error: '' }
             )
-        case 'RECEIVE_EXAMS':
+        case 'RECEIVE_STUDENT_LIST':
             return Object.assign(
                 {},
                 state,
-                { isFetching: false, exams: action.exams }
+                { isFetching: false, students: action.students }
             )
-        case 'FAILED_RECEIVING_EXAMS':
+        case 'FAILED_RECEIVING_STUDENT_LIST':
             return Object.assign(
                 {},
                 state,
                 { isFetching: false, error: action.error }
             )
-        case 'CLEAR_EXAMS':
-            return Object.assign(
-                {},
-                state,
-                { exams: [] }
-            )
+
         default:
             return state;
     }
 }
 
-export default exams;
+export default students;
