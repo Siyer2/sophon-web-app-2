@@ -4,9 +4,9 @@ import { getStudentList } from '../actions/studentAction';
 import { history } from '../helpers/history';
 
 function ExamList(props) {
-    function examClicked(examId, examCode) {
+    function examClicked(examId) {
         props.getStudentList(examId);
-        history.push(`exams/${examCode}`);
+        history.push(`exams/${examId}`);
     }
 
     const exams = props.exams.exams && props.exams.exams.length > 0 && props.exams.exams.map((item) => {

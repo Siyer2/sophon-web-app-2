@@ -59,3 +59,9 @@ export function getStudentList(examId) {
         )
     }
 }
+
+export function reloadStudents(examId) {
+    return function (dispatch) {
+        dispatch(getStudentList(examId));
+    }
+}

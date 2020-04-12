@@ -14,7 +14,7 @@ function StudentList(props) {
     });
 
     return (
-        <table className="table table-hover">
+        <table className="table">
             <thead className="thead">
                 <tr>
                     <th scope="col">Student ID</th>
