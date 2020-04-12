@@ -1,17 +1,15 @@
 import React from 'react';
-
 import NavBar from '../components/NavBar';
-import ExamList from '../components/ExamList';
 
-function LecturerView() {
+function StudentList() {
     return (
         <div>
             <NavBar />
             <div className="container">
-                <ExamList />
+                insert table
             </div>
         </div>
     )
 }
 
-export default LecturerView;
+export default StudentList;
