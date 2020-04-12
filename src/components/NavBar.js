@@ -36,12 +36,18 @@ function NavBar(props) {
                 sophon
             </a>
 
+            <div className="justify-content-end form-inline col">
+                <button type="button" className="btn btn-success my-2 my-sm-0">
+                    New Exam
+                </button>
+            </div>
+
             {userExists() && window.location.pathname !== '/'
             ?
             <Link className="justify-content-end form-inline col" to="/" onClick={() => props.logout()}>
                 <button type="button" className="btn btn-primary">
                     Logout
-            </button>
+                </button>
             </Link>
             :
             <div className="justify-content-end form-inline col">
