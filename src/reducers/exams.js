@@ -2,12 +2,14 @@ const initialState = {
     isFetching: false,
     exams: [],
     error: '', 
-    newExamModalOpen: false
+    newExamModalOpen: false, 
+    applications: []
 }
 
 const exams = (state = initialState, action) => {
     switch (action.type) {
         case 'FETCHING_EXAMS':
+        case 'FETCHING_APPLICATIONS':
             return Object.assign(
                 {},
                 state,
@@ -20,6 +22,7 @@ const exams = (state = initialState, action) => {
                 { isFetching: false, exams: action.exams }
             )
         case 'FAILED_RECEIVING_EXAMS':
+        case 'FAILED_RECEIVING_APPLICATIONS':
             return Object.assign(
                 {},
                 state,
@@ -36,6 +39,12 @@ const exams = (state = initialState, action) => {
                 {},
                 state,
                 { newExamModalOpen: !state.newExamModalOpen }
+            )
+        case 'RECEIVE_APPLICATIONS':
+            return Object.assign(
+                {},
+                state,
+                { isFetching: false, applications: action.applications }
             )
         default:
             return state;

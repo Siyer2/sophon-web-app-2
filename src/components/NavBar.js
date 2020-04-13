@@ -12,7 +12,8 @@ import {
     logout
 } from '../actions/authAction';
 import {
-    toggleExamModal
+    toggleExamModal,
+    getApplications
 } from '../actions/examAction';
 import { userExists } from '../helpers/userExists';
 
@@ -24,6 +25,7 @@ function handleChange(event, name) {
 
 function NavBar(props) {
     function toggleNewExamModal() {
+        !props.exams.applications.length && props.getApplications();
         props.toggleExamModal();
     }
 
@@ -32,6 +34,12 @@ function NavBar(props) {
     }
 
     function NewExamModal() {
+        const applications = props.exams.applications.map((application) => {
+            return (
+                <option key={application._id}>{application.name}</option>
+            )
+        });
+
         return (
             <Modal show={props.exams.newExamModalOpen} onHide={() => {toggleNewExamModal()}}>
                 <Modal.Header closeButton>
@@ -46,11 +54,7 @@ function NavBar(props) {
                         <Form.Group controlId="exampleForm.ControlSelect1">
                             <Form.Label>Application</Form.Label>
                             <Form.Control as="select">
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
+                                {applications}
                             </Form.Control>
                         </Form.Group>
                         <Form.Group>
@@ -156,6 +160,9 @@ const mapDispatchToProps = dispatch => {
         },
         toggleExamModal: () => {
             dispatch(toggleExamModal())
+        },
+        getApplications: () => {
+            dispatch(getApplications())
         }
     }
 }
