@@ -41,6 +41,25 @@ function failedReceivingApplications() {
     }
 }
 
+function creatingExam() {
+    return {
+        type: 'CREATING_EXAM'
+    }
+}
+
+function finishedCreatingExam(data) {
+    return {
+        type: 'FINISHED_CREATING_EXAM',
+        exam: data.exam
+    }
+}
+
+function failedCreatingExam() {
+    return {
+        type: 'FAILED_CREATING_EXAM'
+    }
+}
+
 function clearExamList() {
     return {
         type: 'CLEAR_EXAMS'
@@ -121,6 +140,49 @@ export function getApplications() {
                     dispatch(failedReceivingApplications(error));
                 }
             )
+    }
+}
+
+export function createExam(examName, file, applicationId) {
+    return function (dispatch) {
+        dispatch(creatingExam());
+        
+        var bodyFormData = new FormData();
+        bodyFormData.set("examName", examName);
+        bodyFormData.set("applicationId", applicationId);
+        bodyFormData.append("file", file); 
+
+        return api({
+            method: 'post',
+            url: '/exam/create',
+            headers: Object.assign({ 'Content-Type': 'multipart/form-data' }, authHeader()), 
+            data: bodyFormData
+        })
+        .then(
+            response => {
+                console.log(response.data);
+                return response.data;
+            },
+            error => {
+                console.log("error listing applications", error);
+            }
+        )
+        .then(
+            json => {
+                if (json.error) {
+                    // dispatch(failedReceivingApplications(json.error));
+                }
+                else {
+                    // dispatch(receivedApplications(json));
+                }
+            }
+        )
+        .catch(
+            error => {
+                console.log("error", error);
+                // dispatch(failedReceivingApplications(error));
+            }
+        )
     }
 }
 

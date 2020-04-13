@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import _ from 'lodash';
 import {
     Modal,
     Button,
@@ -7,7 +8,8 @@ import {
 } from 'react-bootstrap';
 import {
     toggleExamModal,
-    getApplications
+    getApplications, 
+    createExam
 } from '../actions/examAction';
 
 function NewExamModal(props) {
@@ -15,8 +17,9 @@ function NewExamModal(props) {
 
     function handleCreateExam(event) {
         event.preventDefault();
-        event.stopPropagation();
-        console.log(state.application ? state.application : props.exams.applications[0].name);
+        const application = state.application ? state.application : props.exams.applications[0].name;
+        const applicationId = (_.find(props.exams.applications, {name: application}))._id;
+        props.createExam(state.examName, state.file, applicationId);
     }
 
     function handleChange(event, name) {
@@ -99,6 +102,9 @@ const mapDispatchToProps = dispatch => {
         },
         getApplications: () => {
             dispatch(getApplications())
+        },
+        createExam: (examName, file, applicationId) => {
+            dispatch(createExam(examName, file, applicationId))
         }
     }
 }
