@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { getStudentList } from '../actions/studentAction';
 import { history } from '../helpers/history';
-import { Button } from 'react-bootstrap';
 
 function ExamList(props) {
     function examClicked(examId) {
@@ -16,11 +15,6 @@ function ExamList(props) {
                 <th scope="row">{item.examName}</th>
                 <td>{item.examCode}</td>
                 <td>{item.isClosed ? "❌" : "✅"}</td>
-                <td>
-                    <Button>
-                        Delete
-                    </Button>
-                </td>
             </tr>
         )
     });
@@ -37,7 +31,6 @@ function ExamList(props) {
                     <th scope="col">Exam</th>
                     <th scope="col">Exam Code</th>
                     <th scope="col">Open</th>
-                    <th scope="col">Delete</th>
                 </tr>
             </thead>
             <tbody>

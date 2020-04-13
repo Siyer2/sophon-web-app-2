@@ -10,7 +10,7 @@ function StudentList(props) {
                 <td>{item.examCode}</td>
                 <td>{item.startTime}</td>
                 <td>
-                    <Button>
+                    <Button onClick={() => {console.log(`download ${item._id}`)}}>
                         Download
                     </Button>
                 </td>

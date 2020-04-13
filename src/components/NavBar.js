@@ -3,6 +3,10 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import _ from 'lodash';
 import {
+    Modal, 
+    Button
+} from 'react-bootstrap';
+import {
     login, 
     logout
 } from '../actions/authAction';
@@ -19,6 +23,25 @@ function NavBar(props) {
         props.login(state.email, state.password);
     }
 
+    function NewExamModal() {
+        return (
+            <Modal show={true} >
+                <Modal.Header closeButton>
+                    <Modal.Title>Modal heading</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" >
+                        Close
+                    </Button>
+                    <Button variant="primary" >
+                        Save Changes
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+        )
+    }
+
     function NavBarHeading() {
         const pathname = window.location.pathname;
         const examId = pathname.split("/exams/").pop();
@@ -26,7 +49,7 @@ function NavBar(props) {
         if (pathname === '/exams') {
             return (
                 <div className="justify-content-end form-inline col">
-                    <button type="button" className="btn btn-success my-2 my-sm-0">
+                    <button type="button" className="btn btn-success my-2 my-sm-0" onClick={() => {console.log("new exam clicked")}}>
                         New Exam
                     </button>
                 </div>
@@ -79,6 +102,8 @@ function NavBar(props) {
                 <input onChange={(e) => { handleChange(e, 'password') }} className="form-control mr-sm-2" type="password" placeholder="Password" />
                 <SubmitButton />
             </div>}
+
+            <NewExamModal />
         </nav>
     )
 }
