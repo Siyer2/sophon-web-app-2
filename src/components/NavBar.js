@@ -45,10 +45,13 @@ function NavBar(props) {
             )
         }
         else if (examId && examId !== '/') {
+            const exam = props.exams.exams.length && _.find(props.exams.exams, { _id: examId });
+            const examName = exam && exam.name;
+
             return (
                 <div className="text-white justify-content-end form-inline col">
                     <h6>
-                        {props.exams.exams.length && _.find(props.exams.exams, { _id: examId }).examName}
+                        {examName ? examName : "Exam Not Found"}
                     </h6>
                 </div>
             )
