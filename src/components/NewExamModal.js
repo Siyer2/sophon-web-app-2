@@ -13,9 +13,10 @@ import {
 function NewExamModal(props) {
     const [state, setState] = useState({});
     function handleChange(event, name) {
+        event.persist();
         if (name === 'questionFile') {
             setState(prevState => {
-                return { ...prevState, file: event.target && event.target.files[0] };
+                return { ...prevState, file: event.target.files[0] };
             });
         }
     }
@@ -23,6 +24,9 @@ function NewExamModal(props) {
     function toggleNewExamModal() {
         !props.exams.applications.length && props.getApplications();
         props.toggleExamModal();
+        setState(prevState => {
+            return { ...prevState, file: '' };
+        });
     }
 
     const applications = props.exams.applications.map((application) => {
