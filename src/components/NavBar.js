@@ -11,6 +11,9 @@ import {
     login, 
     logout
 } from '../actions/authAction';
+import {
+    toggleExamModal
+} from '../actions/examAction';
 import { userExists } from '../helpers/userExists';
 
 var state = {};
@@ -20,13 +23,17 @@ function handleChange(event, name) {
 }
 
 function NavBar(props) {
+    function toggleNewExamModal() {
+        props.toggleExamModal();
+    }
+
     function loginClicked() {
         props.login(state.email, state.password);
     }
 
     function NewExamModal() {
         return (
-            <Modal show={true} >
+            <Modal show={props.exams.newExamModalOpen} onHide={() => {toggleNewExamModal()}}>
                 <Modal.Header closeButton>
                     <Modal.Title>New Exam</Modal.Title>
                 </Modal.Header>
@@ -73,7 +80,7 @@ function NavBar(props) {
         if (pathname === '/exams') {
             return (
                 <div className="justify-content-end form-inline col">
-                    <button type="button" className="btn btn-success my-2 my-sm-0" onClick={() => {console.log("new exam clicked")}}>
+                    <button type="button" className="btn btn-success my-2 my-sm-0" onClick={() => {toggleNewExamModal()}}>
                         New Exam
                     </button>
                 </div>
@@ -146,6 +153,9 @@ const mapDispatchToProps = dispatch => {
         }, 
         logout: () => {
             dispatch(logout())
+        },
+        toggleExamModal: () => {
+            dispatch(toggleExamModal())
         }
     }
 }

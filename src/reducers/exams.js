@@ -1,7 +1,8 @@
 const initialState = {
     isFetching: false,
     exams: [],
-    error: ''
+    error: '', 
+    newExamModalOpen: false
 }
 
 const exams = (state = initialState, action) => {
@@ -29,6 +30,12 @@ const exams = (state = initialState, action) => {
                 {},
                 state,
                 { exams: [] }
+            )
+        case 'TOGGLE_NEW_EXAM_MODAL':
+            return Object.assign(
+                {},
+                state,
+                { newExamModalOpen: !state.newExamModalOpen }
             )
         default:
             return state;
