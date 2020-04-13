@@ -72,6 +72,12 @@ function toggleNewExamModal() {
     }
 }
 
+function clearExamModalData() {
+    return {
+        type: 'CLEAR_EXAM_MODAL_DATA'
+    }
+}
+
 //==== User Requests ====//
 export function getExamList() {
     return function (dispatch) {
@@ -201,5 +207,6 @@ export function reloadExams() {
 export function toggleExamModal() {
     return function (dispatch) {
         dispatch(toggleNewExamModal());
+        dispatch(clearExamModalData());
     }
 }

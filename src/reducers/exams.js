@@ -66,6 +66,12 @@ const exams = (state = initialState, action) => {
                 state,
                 { creatingExam: false, error: action.error ? action.error : 'Unknown Error'}
             )
+        case 'CLEAR_EXAM_MODAL_DATA':
+            return Object.assign(
+                {},
+                state,
+                { newExam: '', error: ''}
+            )
         
         default:
             return state;
