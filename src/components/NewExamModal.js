@@ -107,6 +107,7 @@ function NewExamModal(props) {
                             label={state.file ? state.file.name : "No file chosen"}
                             custom
                             onChange={(e) => { handleChange(e, "questionFile") }}
+                            required
                         />
                         <Form.Text className="text-muted">
                             Every student will have this file when they open the exam.
