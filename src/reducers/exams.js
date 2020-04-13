@@ -3,7 +3,9 @@ const initialState = {
     exams: [],
     error: '', 
     newExamModalOpen: false, 
-    applications: []
+    applications: [], 
+    creatingExam: false, 
+    newExam: ''
 }
 
 const exams = (state = initialState, action) => {
@@ -46,6 +48,25 @@ const exams = (state = initialState, action) => {
                 state,
                 { isFetching: false, applications: action.applications }
             )
+        case 'CREATING_EXAM':
+            return Object.assign(
+                {},
+                state,
+                { creatingExam: true }
+            )
+        case 'FINISHED_CREATING_EXAM':
+            return Object.assign(
+                {},
+                state,
+                { creatingExam: false, newExam: action.exam }
+            )
+        case 'FAILED_CREATING_EXAM':
+            return Object.assign(
+                {},
+                state,
+                { creatingExam: false, error: action.error }
+            )
+        
         default:
             return state;
     }

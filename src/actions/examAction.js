@@ -170,17 +170,17 @@ export function createExam(examName, file, applicationId) {
         .then(
             json => {
                 if (json.error) {
-                    // dispatch(failedReceivingApplications(json.error));
+                    dispatch(failedCreatingExam(json.error));
                 }
                 else {
-                    // dispatch(receivedApplications(json));
+                    dispatch(finishedCreatingExam(json));
                 }
             }
         )
         .catch(
             error => {
                 console.log("error", error);
-                // dispatch(failedReceivingApplications(error));
+                dispatch(failedCreatingExam(error));
             }
         )
     }
