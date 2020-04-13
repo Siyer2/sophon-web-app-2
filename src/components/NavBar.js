@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import _ from 'lodash';
@@ -17,20 +17,28 @@ import {
 } from '../actions/examAction';
 import { userExists } from '../helpers/userExists';
 
-var state = {};
-
-function handleChange(event, name) {
-    state[name] = event.target.value;
-}
+var localState = {};
 
 function NavBar(props) {
+    const [state, setState] = useState({});
+    function handleChange(event, name) {
+        if (name === 'questionFile') {
+            setState(prevState => {
+                return { ...prevState, file: event.target && event.target.files[0] };
+            });
+        }
+        else {
+            localState[name] = event.target.value;
+        }
+    }
+
     function toggleNewExamModal() {
         !props.exams.applications.length && props.getApplications();
         props.toggleExamModal();
     }
 
     function loginClicked() {
-        props.login(state.email, state.password);
+        props.login(localState.email, localState.password);
     }
 
     function NewExamModal() {
@@ -61,8 +69,9 @@ function NavBar(props) {
                             <Form.Label>Question Files</Form.Label>
                             <Form.File
                                 id="custom-file"
-                                label="Custom file input"
+                                label={state.file ? state.file.name : "No file chosen"}
                                 custom
+                                onChange={(e) => {handleChange(e, "questionFile")}}
                             />
                             <Form.Text className="text-muted">
                                 Every student will have this file when they open the exam.
