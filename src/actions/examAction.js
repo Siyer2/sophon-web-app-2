@@ -166,7 +166,6 @@ export function createExam(examName, file, applicationId) {
         })
         .then(
             response => {
-                console.log(response.data);
                 return response.data;
             },
             error => {
@@ -180,6 +179,7 @@ export function createExam(examName, file, applicationId) {
                 }
                 else {
                     dispatch(finishedCreatingExam(json));
+                    dispatch(reloadExams());
                 }
             }
         )
