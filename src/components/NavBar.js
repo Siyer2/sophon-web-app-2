@@ -4,7 +4,8 @@ import { Link } from 'react-router-dom';
 import _ from 'lodash';
 import {
     Modal, 
-    Button
+    Button, 
+    Form
 } from 'react-bootstrap';
 import {
     login, 
@@ -27,17 +28,40 @@ function NavBar(props) {
         return (
             <Modal show={true} >
                 <Modal.Header closeButton>
-                    <Modal.Title>Modal heading</Modal.Title>
+                    <Modal.Title>New Exam</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" >
-                        Close
-                    </Button>
-                    <Button variant="primary" >
-                        Save Changes
-                    </Button>
-                </Modal.Footer>
+                <Modal.Body>
+                    <Form>
+                        <Form.Group >
+                            <Form.Label>Exam Name</Form.Label>
+                            <Form.Control type="text" placeholder="Enter exam name" />
+                        </Form.Group>
+                        <Form.Group controlId="exampleForm.ControlSelect1">
+                            <Form.Label>Application</Form.Label>
+                            <Form.Control as="select">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                            </Form.Control>
+                        </Form.Group>
+                        <Form.Group>
+                            <Form.Label>Question Files</Form.Label>
+                            <Form.File
+                                id="custom-file"
+                                label="Custom file input"
+                                custom
+                            />
+                            <Form.Text className="text-muted">
+                                Every student will have this file when they open the exam.
+                            </Form.Text>
+                        </Form.Group>
+                        <Button variant="primary" type="submit">
+                            Submit
+                        </Button>
+                    </Form>
+                </Modal.Body>
             </Modal>
         )
     }
