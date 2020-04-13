@@ -15,7 +15,8 @@ function NewExamModal(props) {
 
     function handleCreateExam(event) {
         event.preventDefault();
-        console.log("Creating exam", state);
+        event.stopPropagation();
+        console.log(state.application ? state.application : props.exams.applications[0].name);
     }
 
     function handleChange(event, name) {
@@ -59,7 +60,7 @@ function NewExamModal(props) {
                     </Form.Group>
                     <Form.Group controlId="exampleForm.ControlSelect1">
                         <Form.Label>Application</Form.Label>
-                        <Form.Control required as="select">
+                        <Form.Control required as="select" onChange={(e) => { handleChange(e, "application") }}>
                             {applications}
                         </Form.Control>
                     </Form.Group>
