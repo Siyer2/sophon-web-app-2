@@ -28,7 +28,7 @@ const exams = (state = initialState, action) => {
             return Object.assign(
                 {},
                 state,
-                { isFetching: false, error: action.error }
+                { isFetching: false, error: action.error ? action.error : 'Unknown Error'}
             )
         case 'CLEAR_EXAMS':
             return Object.assign(
@@ -64,7 +64,7 @@ const exams = (state = initialState, action) => {
             return Object.assign(
                 {},
                 state,
-                { creatingExam: false, error: action.error }
+                { creatingExam: false, error: action.error ? action.error : 'Unknown Error'}
             )
         
         default:

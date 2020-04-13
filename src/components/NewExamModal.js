@@ -51,6 +51,39 @@ function NewExamModal(props) {
     });
 
     return (
+        props.exams.error ?
+            <Modal show={props.exams.newExamModalOpen} onHide={() => { toggleNewExamModal() }}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Failed Creating Exam</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    {props.exams.error}
+            </Modal.Body>
+            </Modal>
+        :
+        props.exams.creatingExam ?
+        <Modal show={props.exams.newExamModalOpen} onHide={() => { toggleNewExamModal() }}>
+            <Modal.Header closeButton>
+                <Modal.Title>New Exam</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+                <div className="spinner-border" role="status">
+                    <span className="sr-only">Loading...</span>
+                </div>
+            </Modal.Body>
+        </Modal>
+        :
+        props.exams.newExam ? 
+        <Modal show={props.exams.newExamModalOpen} onHide={() => { toggleNewExamModal() }}>
+            <Modal.Header closeButton>
+                <Modal.Title>Created Exam</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+                Share the code <strong>{props.exams.newExam.examCode}</strong> with your students. <br/><br/>
+                Students entering this code in the Sophon desktop application will enter the examination for {props.exams.newExam.examName}.
+            </Modal.Body>
+        </Modal>
+        :
         <Modal show={props.exams.newExamModalOpen} onHide={() => { toggleNewExamModal() }}>
             <Modal.Header closeButton>
                 <Modal.Title>New Exam</Modal.Title>
