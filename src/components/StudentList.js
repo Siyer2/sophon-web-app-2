@@ -10,9 +10,13 @@ function StudentList(props) {
                 <td>{item.examCode}</td>
                 <td>{item.startTime}</td>
                 <td>
-                    <Button onClick={() => {console.log(`download ${item._id}`)}}>
-                        Download
-                    </Button>
+                    {item.submissionLocation ? 
+                        <Button onClick={() => {console.log(`download ${item._id}`)}}>
+                            DOWNLOAD
+                        </Button>
+                    :
+                    'No Submission Yet'
+                    }
                 </td>
             </tr>
         )
