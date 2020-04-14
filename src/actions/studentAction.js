@@ -23,6 +23,25 @@ function failedReceivingStudentList() {
     }
 }
 
+function downloadingSubmission() {
+    return {
+        type: 'DOWNLOADING_SUBMISSION'
+    }
+}
+
+function downloadedSubmission() {
+    return {
+        type: 'DOWNLOADED_SUBMISSION'
+    }
+}
+
+function failedDownloadingSubmission(error) {
+    return {
+        type: 'FAILED_DOWNLOADING_SUBMISSION', 
+        error: error
+    }
+}
+
 //==== User Requests ====//
 export function getStudentList(examId) {
     return function(dispatch) {
@@ -62,12 +81,12 @@ export function getStudentList(examId) {
 }
 
 export function downloadStudentSubmission(studentId, submissionLocation) {
-    const header = Object.assign({ Authorization: `Bearer ${JSON.parse(localStorage.getItem('user')).token}` });
     return function(dispatch) {
+        dispatch(downloadingSubmission());
         return api({
             method: 'post', 
             url: '/exam/download', 
-            headers: header, 
+            headers: authHeader(), 
             responseType: 'arraybuffer',
             data: {
                 studentId, 
@@ -76,27 +95,18 @@ export function downloadStudentSubmission(studentId, submissionLocation) {
         })
         .then(
             async response => {
-                // let blob = new Blob([response.data], { type: 'application/zip' })
                 download(response.data, `${studentId}.zip`);
-                return response;
+                dispatch(downloadedSubmission());
             },
             error => {
                 console.log("error getting student list", error);
+                dispatch(failedDownloadingSubmission(error));
             }
-        )
-        .then(
-            json => {
-                if (json.error) {
-                    // dispatch(failedReceivingStudentList(json.error));
-                }
-                else {
-                    // dispatch(receivedStudentList(json));
-                }
-            }
-        )
-        .catch(
-            error => {
-                // dispatch(failedReceivingStudentList(error));
+            )
+            .catch(
+                error => {
+                    console.log("error getting student list", error);
+                    dispatch(failedDownloadingSubmission(error));
             }
         )
     }

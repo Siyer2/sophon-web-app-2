@@ -17,6 +17,13 @@ function StudentList(props) {
                 <td>{item.startTime}</td>
                 <td>
                     {item.submissionLocation ? 
+                        props.students.isDownloadingSubmission ? 
+                        <Button disabled>
+                            <div className="spinner-border" role="status">
+                                <span className="sr-only">Loading...</span>
+                            </div>
+                        </Button>
+                        :
                         <Button onClick={() => {handleDownloadSubmission(item.studentId, item.submissionLocation)}}>
                             DOWNLOAD
                         </Button>

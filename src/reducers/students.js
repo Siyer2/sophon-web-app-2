@@ -1,7 +1,8 @@
 const initialState = {
     isFetching: false, 
     students: [], 
-    error: ''
+    error: '', 
+    isDownloadingSubmission: false
 }
 
 const students = (state = initialState, action) => {
@@ -24,7 +25,24 @@ const students = (state = initialState, action) => {
                 state,
                 { isFetching: false, error: action.error }
             )
-
+        case 'DOWNLOADING_SUBMISSION':
+            return Object.assign(
+                {},
+                state,
+                { isDownloadingSubmission: true }
+            )
+        case 'DOWNLOADED_SUBMISSION':
+            return Object.assign(
+                {},
+                state,
+                { isDownloadingSubmission: false }
+            )
+        case 'FAILED_DOWNLOADING_SUBMISSION':
+            return Object.assign(
+                {},
+                state,
+                { isDownloadingSubmission: false, error: action.error }
+            )
         default:
             return state;
     }
