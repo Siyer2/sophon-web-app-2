@@ -60,6 +60,43 @@ export function getStudentList(examId) {
     }
 }
 
+export function downloadStudentSubmission(studentId, submissionLocation) {
+    return function(dispatch) {
+        return api({
+            method: 'post', 
+            url: '/exam/download', 
+            headers: authHeader(), 
+            data: {
+                studentId, 
+                submissionLocation
+            }
+        })
+        .then(
+            response => {
+                return response;
+            },
+            error => {
+                console.log("error getting student list", error);
+            }
+        )
+        .then(
+            json => {
+                if (json.error) {
+                    dispatch(failedReceivingStudentList(json.error));
+                }
+                else {
+                    dispatch(receivedStudentList(json));
+                }
+            }
+        )
+        .catch(
+            error => {
+                dispatch(failedReceivingStudentList(error));
+            }
+        )
+    }
+}
+
 export function reloadStudents(examId) {
     return function (dispatch) {
         dispatch(getStudentList(examId));
