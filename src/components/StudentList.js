@@ -1,8 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Button } from 'react-bootstrap';
+import { downloadStudentSubmission } from '../actions/studentAction';
 
 function StudentList(props) {
+    function handleDownloadSubmission(studentId, submissionLocation) {
+        console.log(`download ${studentId}`)
+        props.downloadStudentSubmission(studentId, submissionLocation);
+    }
+
     const exams = props.students.students && props.students.students.length > 0 && props.students.students.map((item) => {
         return (
             <tr key={item._id}>
@@ -11,7 +17,7 @@ function StudentList(props) {
                 <td>{item.startTime}</td>
                 <td>
                     {item.submissionLocation ? 
-                        <Button onClick={() => {console.log(`download ${item._id}`)}}>
+                        <Button onClick={() => {handleDownloadSubmission(item.studentId, item.submissionLocation)}}>
                             DOWNLOAD
                         </Button>
                     :
@@ -50,14 +56,12 @@ const mapStateToProps = state => {
     };
 };
 
-/*
 const mapDispatchToProps = dispatch => {
     return {
-        getStudentList: (examId) => {
-            dispatch(getStudentList(examId))
+        downloadStudentSubmission: (studentId, submissionLocation) => {
+            dispatch(downloadStudentSubmission(studentId, submissionLocation))
         },
     }
 }
-*/
 
-export default connect(mapStateToProps, null)(StudentList);
+export default connect(mapStateToProps, mapDispatchToProps)(StudentList);

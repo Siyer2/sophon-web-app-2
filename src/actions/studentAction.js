@@ -1,3 +1,4 @@
+import download from 'js-file-download';
 import config from '../config';
 import { authHeader } from '../helpers/authHeader';
 const api = config.API;
@@ -61,18 +62,21 @@ export function getStudentList(examId) {
 }
 
 export function downloadStudentSubmission(studentId, submissionLocation) {
+    const header = Object.assign({ responseType: 'arraybuffer', Authorization: `Bearer ${JSON.parse(localStorage.getItem('user')).token}` });
     return function(dispatch) {
         return api({
             method: 'post', 
             url: '/exam/download', 
-            headers: authHeader(), 
+            headers: header, 
             data: {
                 studentId, 
                 submissionLocation
             }
         })
         .then(
-            response => {
+            async response => {
+                console.log(response);
+                download(response.data, `${studentId}.zip`);
                 return response;
             },
             error => {
@@ -82,16 +86,16 @@ export function downloadStudentSubmission(studentId, submissionLocation) {
         .then(
             json => {
                 if (json.error) {
-                    dispatch(failedReceivingStudentList(json.error));
+                    // dispatch(failedReceivingStudentList(json.error));
                 }
                 else {
-                    dispatch(receivedStudentList(json));
+                    // dispatch(receivedStudentList(json));
                 }
             }
         )
         .catch(
             error => {
-                dispatch(failedReceivingStudentList(error));
+                // dispatch(failedReceivingStudentList(error));
             }
         )
     }
