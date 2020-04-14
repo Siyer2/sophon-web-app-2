@@ -62,12 +62,13 @@ export function getStudentList(examId) {
 }
 
 export function downloadStudentSubmission(studentId, submissionLocation) {
-    const header = Object.assign({ responseType: 'arraybuffer', Authorization: `Bearer ${JSON.parse(localStorage.getItem('user')).token}` });
+    const header = Object.assign({ Authorization: `Bearer ${JSON.parse(localStorage.getItem('user')).token}` });
     return function(dispatch) {
         return api({
             method: 'post', 
             url: '/exam/download', 
             headers: header, 
+            responseType: 'arraybuffer',
             data: {
                 studentId, 
                 submissionLocation
@@ -75,7 +76,7 @@ export function downloadStudentSubmission(studentId, submissionLocation) {
         })
         .then(
             async response => {
-                console.log(response);
+                // let blob = new Blob([response.data], { type: 'application/zip' })
                 download(response.data, `${studentId}.zip`);
                 return response;
             },
