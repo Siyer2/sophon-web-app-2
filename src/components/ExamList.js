@@ -44,6 +44,14 @@ function ExamList(props) {
         });
     }
 
+    function deleteExam() {
+        console.log("deleting exam", state.examId);
+
+        setState(prevState => {
+            return { ...prevState, openDeleteExamModal: !state.openDeleteExamModal, examToDelete: '', examId: '' };
+        });
+    }
+
     function DeleteExamModal() {
         return (
             <Modal show={state.openDeleteExamModal} onHide={() => {toggleExamModal()}}>
@@ -53,7 +61,7 @@ function ExamList(props) {
                 <Modal.Body>All student submissions and files will also be deleted. Are you sure?</Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={() => { toggleExamModal() }}>Cancel</Button>
-                    <Button variant="danger" onClick={() => {console.log("deleting exam", state.examId)}}>Yes, I'm sure</Button>
+                    <Button variant="danger" onClick={() => {deleteExam()}}>Yes, I'm sure</Button>
                 </Modal.Footer>
             </Modal>
         )
