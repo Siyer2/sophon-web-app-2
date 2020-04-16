@@ -9,7 +9,9 @@ import {
     Delete
 } from '@material-ui/icons';
 import {
-    Button
+    Button, 
+    OverlayTrigger, 
+    Tooltip
 } from 'react-bootstrap';
 
 function ExamList(props) {
@@ -23,7 +25,18 @@ function ExamList(props) {
             <tr key={item._id + item.examCode}>
                 <th scope="row">{item.examName}</th>
                 <td>{item.examCode}</td>
-                <td>{item.isClosed ? <Lock /> : <LockOpen />}</td>
+                <td>
+                    <OverlayTrigger
+                        key={'right'}
+                        placement={'right'}
+                        overlay={
+                            <Tooltip id={`tooltip-right`}>
+                                {item.isClosed ? `Click here to open exam to students.` : `Click here to close exam, preventing students from entering.`}
+                            </Tooltip>
+                        }>
+                        <Button variant="outline-warning">{item.isClosed ? <Lock /> : <LockOpen />}</Button>
+                    </OverlayTrigger>
+                </td>
                 <td>
                     <Button variant="outline-success" onClick={() => { examClicked(item._id, item.examCode) }}>
                         <Input />
