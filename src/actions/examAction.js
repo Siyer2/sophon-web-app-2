@@ -248,6 +248,43 @@ export function toggleCloseExam(examId) {
     }
 }
 
+export function deleteExam(examId) {
+    return function (dispatch) {
+        return api({
+            method: 'post',
+            url: '/exam/delete',
+            headers: authHeader(),
+            data: { examId }
+        })
+            .then(
+                response => {
+                    return response.data;
+                },
+                error => {
+                    console.log("error deleting exam", error);
+                }
+            )
+            .then(
+                json => {
+                    if (json.error) {
+                        // dispatch(errorTogglingExam(json.error));
+                    }
+                    else {
+                        console.log("json", json);
+                        // dispatch(finishedTogglingExam(json));
+                        dispatch(reloadExams());
+                    }
+                }
+            )
+            .catch(
+                error => {
+                    console.log("error", error);
+                    // dispatch(errorTogglingExam(error));
+                }
+            )
+    }
+}
+
 export function clearExams() {
     return function (dispatch) {
         dispatch(clearExamList());

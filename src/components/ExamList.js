@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import { connect } from 'react-redux';
 import { getStudentList } from '../actions/studentAction';
-import { toggleCloseExam } from '../actions/examAction';
+import { toggleCloseExam, deleteExam } from '../actions/examAction';
 import { history } from '../helpers/history';
 import {
     Input, 
@@ -45,7 +45,7 @@ function ExamList(props) {
     }
 
     function deleteExam() {
-        console.log("deleting exam", state.examId);
+        props.deleteExam(state.examId);
 
         setState(prevState => {
             return { ...prevState, openDeleteExamModal: !state.openDeleteExamModal, examToDelete: '', examId: '' };
@@ -135,6 +135,9 @@ const mapDispatchToProps = dispatch => {
         }, 
         toggleCloseExam: (examId) => {
             dispatch(toggleCloseExam(examId))
+        },
+        deleteExam: (examId) => {
+            dispatch(deleteExam(examId))
         }
     }
 }
