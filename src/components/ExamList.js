@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { connect } from 'react-redux';
 import { getStudentList } from '../actions/studentAction';
 import { toggleCloseExam } from '../actions/examAction';
@@ -12,10 +12,15 @@ import {
 import {
     Button, 
     OverlayTrigger, 
-    Tooltip
+    Tooltip, 
+    Modal
 } from 'react-bootstrap';
 
 function ExamList(props) {
+    const [state, setState] = useState({
+        openDeleteExamModal: false
+    });
+
     function examClicked(examId) {
         props.getStudentList(examId);
         history.push(`exams/${examId}`);
@@ -23,6 +28,35 @@ function ExamList(props) {
 
     function toggleCloseExam(examId) {
         props.toggleCloseExam(examId);
+    }
+
+    function deleteExamClicked(examId, examName) {
+        setState(prevState => {
+            return { ...prevState, examToDelete: examName, examId };
+        });
+
+        toggleExamModal();
+    }
+
+    function toggleExamModal() {
+        setState(prevState => {
+            return { ...prevState, openDeleteExamModal: !state.openDeleteExamModal };
+        });
+    }
+
+    function DeleteExamModal() {
+        return (
+            <Modal show={state.openDeleteExamModal} onHide={() => {toggleExamModal()}}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Delete {state.examToDelete}?</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>All student submissions and files will also be deleted. Are you sure?</Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={() => { toggleExamModal() }}>Cancel</Button>
+                    <Button variant="danger" onClick={() => {console.log("deleting exam", state.examId)}}>Yes, I'm sure</Button>
+                </Modal.Footer>
+            </Modal>
+        )
     }
 
     const exams = props.exams.exams && props.exams.exams.length > 0 && props.exams.exams.map((item) => {
@@ -48,7 +82,7 @@ function ExamList(props) {
                     </Button>
                 </td>
                 <td>
-                    <Button variant="outline-danger">
+                    <Button variant="outline-danger" onClick={() => {deleteExamClicked(item._id, item.examName)}}>
                         <Delete />
                     </Button>
                 </td>
@@ -63,6 +97,7 @@ function ExamList(props) {
         </div>
         :
         <table className="table">
+            <DeleteExamModal />
             <thead className="thead">
                 <tr>
                     <th scope="col">Exam</th>
