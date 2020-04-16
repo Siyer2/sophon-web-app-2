@@ -78,6 +78,24 @@ function clearExamModalData() {
     }
 }
 
+function toggleClosingExam() {
+    return {
+        type: 'TOGGLE_CLOSE_EXAM'
+    }
+}
+
+function finishedTogglingExam() {
+    return {
+        type: 'FINISHED_TOGGLING_EXAM'
+    }
+}
+
+function errorTogglingExam() {
+    return {
+        type: 'ERROR_TOGGLING_EXAM'
+    }
+}
+
 //==== User Requests ====//
 export function getExamList() {
     return function (dispatch) {
@@ -187,6 +205,44 @@ export function createExam(examName, file, applicationId) {
             error => {
                 console.log("error", error);
                 dispatch(failedCreatingExam(error));
+            }
+        )
+    }
+}
+
+export function toggleCloseExam(examId) {
+    return function (dispatch) {
+        dispatch(toggleClosingExam());
+        return api({
+            method: 'post',
+            url: '/exam/toggleClose',
+            headers: authHeader(), 
+            data: {examId}
+        })
+        .then(
+            response => {
+                return response.data;
+            },
+            error => {
+                console.log("error toggle closing exam", error);
+            }
+        )
+        .then(
+            json => {
+                if (json.error) {
+                    dispatch(errorTogglingExam(json.error));
+                }
+                else {
+                    console.log("json", json);
+                    dispatch(finishedTogglingExam(json));
+                    dispatch(reloadExams());
+                }
+            }
+        )
+        .catch(
+            error => {
+                console.log("error", error);
+                dispatch(errorTogglingExam(error));
             }
         )
     }

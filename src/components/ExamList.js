@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { getStudentList } from '../actions/studentAction';
+import { toggleCloseExam } from '../actions/examAction';
 import { history } from '../helpers/history';
 import {
     Input, 
@@ -20,6 +21,10 @@ function ExamList(props) {
         history.push(`exams/${examId}`);
     }
 
+    function toggleCloseExam(examId) {
+        props.toggleCloseExam(examId);
+    }
+
     const exams = props.exams.exams && props.exams.exams.length > 0 && props.exams.exams.map((item) => {
         return (
             <tr key={item._id + item.examCode}>
@@ -34,7 +39,7 @@ function ExamList(props) {
                                 {item.isClosed ? `Click here to open exam to students.` : `Click here to close exam, preventing students from entering.`}
                             </Tooltip>
                         }>
-                        <Button variant="outline-warning">{item.isClosed ? <Lock /> : <LockOpen />}</Button>
+                        <Button variant="outline-warning" onClick={() => {toggleCloseExam(item._id)}}>{item.isClosed ? <Lock /> : <LockOpen />}</Button>
                     </OverlayTrigger>
                 </td>
                 <td>
@@ -85,6 +90,9 @@ const mapDispatchToProps = dispatch => {
         getStudentList: (examId) => {
             dispatch(getStudentList(examId))
         }, 
+        toggleCloseExam: (examId) => {
+            dispatch(toggleCloseExam(examId))
+        }
     }
 }
 
