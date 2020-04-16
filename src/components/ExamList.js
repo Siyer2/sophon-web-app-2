@@ -3,7 +3,10 @@ import { connect } from 'react-redux';
 import { getStudentList } from '../actions/studentAction';
 import { history } from '../helpers/history';
 import {
-    Input
+    Input, 
+    LockOpen, 
+    Lock, 
+    Delete
 } from '@material-ui/icons';
 import {
     Button
@@ -20,10 +23,15 @@ function ExamList(props) {
             <tr key={item._id + item.examCode}>
                 <th scope="row">{item.examName}</th>
                 <td>{item.examCode}</td>
-                <td>{item.isClosed ? "❌" : "✅"}</td>
+                <td>{item.isClosed ? <Lock /> : <LockOpen />}</td>
                 <td>
-                    <Button onClick={() => { examClicked(item._id, item.examCode) }}>
+                    <Button variant="outline-success" onClick={() => { examClicked(item._id, item.examCode) }}>
                         <Input />
+                    </Button>
+                </td>
+                <td>
+                    <Button variant="outline-danger">
+                        <Delete />
                     </Button>
                 </td>
             </tr>
@@ -36,13 +44,14 @@ function ExamList(props) {
             <span className="sr-only">Loading...</span>
         </div>
         :
-        <table className="table table-hover">
+        <table className="table">
             <thead className="thead">
                 <tr>
                     <th scope="col">Exam</th>
                     <th scope="col">Exam Code</th>
                     <th scope="col">Open</th>
                     <th scope="col">View Submissions</th>
+                    <th scope="col">Delete</th>
                 </tr>
             </thead>
             <tbody>
