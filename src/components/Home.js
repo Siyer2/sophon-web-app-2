@@ -10,7 +10,7 @@ function Home(props) {
     function ErrorModal() {
         return (
             <Modal show={props.auth.error ? true : false} onHide={() => props.clearError()}>
-                <Modal.Body>{props.auth.error}</Modal.Body>
+                <Modal.Body>{props.auth.error.toString()}</Modal.Body>
                 <Button onClick={() => props.clearError()}>Close</Button>
             </Modal>
         )

@@ -75,7 +75,7 @@ export function login(email, password) {
         )
         .catch(
             error => {
-                console.log("error", error);
+                console.log("error", error.toString());
                 dispatch(failedLogin(error));
             }
         )

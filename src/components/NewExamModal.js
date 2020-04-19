@@ -57,7 +57,7 @@ function NewExamModal(props) {
                     <Modal.Title>Failed Creating Exam</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    {props.exams.error}
+                    {props.exams.error.toString()}
             </Modal.Body>
             </Modal>
         :
