@@ -5,7 +5,10 @@ const initialState = {
     newExamModalOpen: false, 
     applications: [], 
     creatingExam: false, 
-    newExam: ''
+    newExam: '', 
+    enterExamError: '', 
+    enteringExam: false, 
+    examEntranceId: ''
 }
 
 const exams = (state = initialState, action) => {
@@ -71,6 +74,24 @@ const exams = (state = initialState, action) => {
                 {},
                 state,
                 { newExam: '', error: ''}
+            )
+        case 'REQUEST_ENTER_EXAM':
+            return Object.assign(
+                {},
+                state,
+                { enteringExam: true }
+            )
+        case 'SUCCESS_ENTERING_EXAM':
+            return Object.assign(
+                {},
+                state,
+                { enteringExam: false, examEntranceId: action.examEntranceId }
+            )
+        case 'FAILED_ENTERING_EXAM':
+            return Object.assign(
+                {},
+                state,
+                { enteringExam: false, enterExamError: action.error }
             )
         
         default:
