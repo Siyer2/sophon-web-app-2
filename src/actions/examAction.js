@@ -96,6 +96,27 @@ function errorTogglingExam() {
     }
 }
 
+function requestEnteringExam() {
+    return {
+        type: 'REQUEST_ENTER_EXAM'
+    }
+}
+
+function successEnteringExam(data) {
+    return {
+        type: 'SUCCESS_ENTERING_EXAM',
+        examEntranceId: data.examEntranceId
+    }
+}
+
+function failedEnteringExam(error) {
+    error = error ? error : 'Unknown Error.'
+    return {
+        type: 'FAILED_ENTERING_EXAM', 
+        error
+    }
+}
+
 //==== User Requests ====//
 export function getExamList() {
     return function (dispatch) {
@@ -287,6 +308,7 @@ export function deleteExam(examId) {
 
 export function enterExam(examCode, studentId) {
     return function (dispatch) {
+        dispatch(requestEnteringExam());
         return api({
             method: 'post', 
             url: '/exam/enter', 
@@ -300,13 +322,25 @@ export function enterExam(examCode, studentId) {
                     return response.data;
                 }, 
                 error => {
+                    dispatch(failedEnteringExam(error))
                     console.log("error entering exam", error);
+                }
+            )
+            .then(
+                json => {
+                    if (json.error) {
+                        dispatch(failedEnteringExam(json.error));
+                    }
+                    else {
+                        console.log("json", json);
+                        dispatch(successEnteringExam(json));
+                    }
                 }
             )
             .catch(
                 error => {
                     console.log("caught error entering exam", error);
-                    // dispatch(errorTogglingExam(error));
+                    dispatch(failedEnteringExam(error));
                 }
             )
     }
