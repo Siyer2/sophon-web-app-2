@@ -278,7 +278,34 @@ export function deleteExam(examId) {
             )
             .catch(
                 error => {
-                    console.log("error", error);
+                    console.log("caught error toggling exam", error);
+                    // dispatch(errorTogglingExam(error));
+                }
+            )
+    }
+}
+
+export function enterExam(examCode, studentId) {
+    return function (dispatch) {
+        return api({
+            method: 'post', 
+            url: '/exam/enter', 
+            data: {
+                examCode, 
+                studentId
+            }
+        })
+            .then(
+                response => {
+                    return response.data;
+                }, 
+                error => {
+                    console.log("error entering exam", error);
+                }
+            )
+            .catch(
+                error => {
+                    console.log("caught error entering exam", error);
                     // dispatch(errorTogglingExam(error));
                 }
             )
