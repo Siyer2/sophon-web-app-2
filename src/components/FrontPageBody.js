@@ -18,15 +18,12 @@ function FrontPageBody() {
                     <Form>
                         <Form.Group>
                             <Form.Label>Exam Code</Form.Label>
-                            <Form.Control type="text" placeholder="Enter Exam Code" />
-                            <Form.Text className="text-muted">
-                                You would've received this from your Lecturer.
-                            </Form.Text>
+                            <Form.Control required type="text" placeholder="Enter Exam Code" />
                         </Form.Group>
 
                         <Form.Group>
                             <Form.Label>Student ID</Form.Label>
-                            <Form.Control type="text" placeholder="Student ID" />
+                            <Form.Control required type="text" placeholder="Enter Student ID" />
                         </Form.Group>
                         <Button variant="primary" type="submit">
                             Enter
