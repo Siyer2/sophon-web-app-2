@@ -1,15 +1,18 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import {
     Form, 
     Button
 } from 'react-bootstrap';
+
+import { enterExam } from '../actions/examAction';
 
 var state = {};
 
 function FrontPageBody(props) {
     function enterExamClicked(event) {
         event.preventDefault();
-        console.log("state", state);
+        props.enterExam(state.examCode, state.studentId);
     }
     function handleChangeText(event, name) {
         state[name] = event.target.value;
@@ -45,4 +48,20 @@ function FrontPageBody(props) {
     )
 }
 
-export default FrontPageBody;
+/*
+const mapStateToProps = state => {
+    return {
+        auth: state.auth,
+        exams: state.exams
+    };
+};*/
+
+const mapDispatchToProps = dispatch => {
+    return {
+        enterExam: (examCode, studentId) => {
+            dispatch(enterExam(examCode, studentId))
+        }
+    }
+}
+
+export default connect(null, mapDispatchToProps)(FrontPageBody);
