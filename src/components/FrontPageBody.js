@@ -37,9 +37,20 @@ function FrontPageBody(props) {
                             <Form.Label>Student ID</Form.Label>
                             <Form.Control required type="text" placeholder="Enter Student ID" onChange={(e) => { handleChangeText(e, "studentId") }}/>
                         </Form.Group>
-                        <Button variant="primary" type="submit">
-                            Enter
+                        <Button disabled={props.exams.enteringExam} variant="primary" type="submit">
+                            {props.exams.enteringExam ? "Loading..." : "Enter"}
                         </Button>
+                        {props.exams.enteringExam ?
+                        <Form.Text className="text-muted">
+                            This can take up to 3 minutes.
+                        </Form.Text>
+                        :
+                        props.exams.enterExamError ?
+                        <Form.Text className="text-muted">
+                            {props.exams.enterExamError.toString()}
+                        </Form.Text>
+                        : null
+                    }
                     </Form>
 
                 </div>
@@ -48,13 +59,11 @@ function FrontPageBody(props) {
     )
 }
 
-/*
 const mapStateToProps = state => {
     return {
-        auth: state.auth,
         exams: state.exams
     };
-};*/
+};
 
 const mapDispatchToProps = dispatch => {
     return {
@@ -64,4 +73,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(null, mapDispatchToProps)(FrontPageBody);
+export default connect(mapStateToProps, mapDispatchToProps)(FrontPageBody);

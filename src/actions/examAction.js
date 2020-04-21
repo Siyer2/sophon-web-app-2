@@ -332,7 +332,6 @@ export function enterExam(examCode, studentId) {
                         dispatch(failedEnteringExam(json.error));
                     }
                     else {
-                        console.log("json", json);
                         dispatch(successEnteringExam(json));
                     }
                 }
