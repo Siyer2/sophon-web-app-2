@@ -8,7 +8,7 @@ const initialState = {
     newExam: '', 
     enterExamError: '', 
     enteringExam: false, 
-    ip: ''
+    examEntranceId: ''
 }
 
 const exams = (state = initialState, action) => {
@@ -85,7 +85,7 @@ const exams = (state = initialState, action) => {
             return Object.assign(
                 {},
                 state,
-                { enteringExam: false, ip: action.ip }
+                { enteringExam: false, examEntranceId: action.examEntranceId }
             )
         case 'FAILED_ENTERING_EXAM':
             return Object.assign(

@@ -106,7 +106,7 @@ function requestEnteringExam() {
 function successEnteringExam(data) {
     return {
         type: 'SUCCESS_ENTERING_EXAM',
-        ip: data.ip
+        examEntranceId: data.examEntranceId
     }
 }
 
@@ -336,7 +336,7 @@ export function enterExam(examCode, studentId) {
                         dispatch(successEnteringExam(json));
 
                         // Download the seb file
-                        downloadSEBFile(json.ip, `${examCode}_${studentId}`);
+                        downloadSEBFile(json.examEntranceId, `${examCode}_${studentId}`);
                     }
                 }
             )
@@ -369,7 +369,7 @@ export function toggleExamModal() {
 }
 
 //==== Helper Functions ====//
-function downloadSEBFile(ip, filename) {
+function downloadSEBFile(examEntranceId, filename) {
     var data = `<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
@@ -377,7 +377,7 @@ function downloadSEBFile(ip, filename) {
     <key>originatorVersion</key>
     <string>SEB_Win_2.0RC</string>
     <key>startURL</key>
-    <string>INSERT_INSTANCE_SERVER_URL/?ip=INSERT_EXAM_ENTRANCE_IP</string>
+    <string>INSERT_INSTANCE_SERVER_URL/?_id=INSERT_EXAM_ENTRANCE_ID</string>
     <key>sebServerURL</key>
     <string />
     <key>hashedAdminPassword</key>
@@ -686,5 +686,5 @@ function downloadSEBFile(ip, filename) {
     <false />
   </dict>
 </plist>`;
-    download(data.replace("INSERT_INSTANCE_SERVER_URL", "http://localhost:3000").replace("INSERT_EXAM_ENTRANCE_IP", ip), `${filename}.seb`);
+    download(data.replace("INSERT_INSTANCE_SERVER_URL", "http://localhost:3000").replace("INSERT_EXAM_ENTRANCE_ID", examEntranceId), `${filename}.seb`);
 }
