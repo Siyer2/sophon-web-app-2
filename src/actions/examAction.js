@@ -106,7 +106,7 @@ function requestEnteringExam() {
 function successEnteringExam(data) {
     return {
         type: 'SUCCESS_ENTERING_EXAM',
-        examEntranceId: data.examEntranceId
+        ip: data.ip
     }
 }
 
@@ -369,7 +369,7 @@ export function toggleExamModal() {
 }
 
 //==== Helper Functions ====//
-function downloadSEBFile(examEntranceId, filename) {
+function downloadSEBFile(ip, filename) {
     const data = `<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
@@ -377,11 +377,13 @@ function downloadSEBFile(examEntranceId, filename) {
     <key>originatorVersion</key>
     <string>SEB_Win_2.0RC</string>
     <key>startURL</key>
-    <string>https://q-83.com?_id=INSERT_EXAM_ENTRANCE_ID</string>
+    <string>INSTANCE_SERVER_URL/?ip=INSERT_EXAM_ENTRANCE_IP</string>
     <key>sebServerURL</key>
     <string />
     <key>hashedAdminPassword</key>
     <string />
+    <key>sendBrowserExamKey</key>
+    <true />
     <key>allowQuit</key>
     <true />
     <key>ignoreExitKeys</key>
@@ -684,5 +686,5 @@ function downloadSEBFile(examEntranceId, filename) {
     <false />
   </dict>
 </plist>`;
-    download(data.replace("INSERT_EXAM_ENTRANCE_ID", examEntranceId), `${filename}.seb`);
+    download(data.replace("INSERT_EXAM_ENTRANCE_IP", ip), `${filename}.seb`);
 }
