@@ -466,8 +466,6 @@ function downloadSEBFile(examEntranceId, filename) {
     <string />
     <key>browserURLSalt</key>
     <true />
-    <key>sendBrowserExamKey</key>
-    <false />
     <key>quitURL</key>
     <string />
     <key>monitorProcesses</key>
@@ -686,5 +684,5 @@ function downloadSEBFile(examEntranceId, filename) {
     <false />
   </dict>
 </plist>`;
-    download(data.replace("INSERT_INSTANCE_SERVER_URL", "http://localhost:3000").replace("INSERT_EXAM_ENTRANCE_ID", examEntranceId), `${filename}.seb`);
+    download(data.replace("INSERT_INSTANCE_SERVER_URL", "http://localhost:3001").replace("INSERT_EXAM_ENTRANCE_ID", examEntranceId), `${filename}.seb`);
 }
