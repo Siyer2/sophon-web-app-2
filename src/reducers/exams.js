@@ -8,7 +8,8 @@ const initialState = {
     newExam: '', 
     enterExamError: '', 
     enteringExam: false, 
-    examEntranceId: ''
+    examEntranceId: '', 
+    deletingExam: false
 }
 
 const exams = (state = initialState, action) => {
@@ -93,7 +94,24 @@ const exams = (state = initialState, action) => {
                 state,
                 { enteringExam: false, enterExamError: action.error }
             )
-        
+        case 'REQUEST_DELETING_EXAM':
+            return Object.assign(
+                {},
+                state,
+                { deletingExam: true }
+            )
+        case 'FAILED_DELETING_EXAM':
+            return Object.assign(
+                {},
+                state,
+                { deletingExam: false, error: action.error }
+            )
+        case 'FINISHED_DELETING_EXAM':
+            return Object.assign(
+                {},
+                state,
+                { deletingExam: false }
+            )
         default:
             return state;
     }

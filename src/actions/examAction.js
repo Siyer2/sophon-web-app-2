@@ -118,6 +118,26 @@ function failedEnteringExam(error) {
     }
 }
 
+function requestDeletingExam() {
+    return {
+        type: 'REQUEST_DELETING_EXAM'
+    }
+}
+
+function failedDeletingExam(error) {
+    error = error ? error : 'Unknown Error.'
+    return {
+        type: 'FAILED_DELETING_EXAM',
+        error
+    }
+}
+
+function finishedDeletingExam() {
+    return {
+        type: 'FINISHED_DELETING_EXAM'
+    }
+}
+
 //==== User Requests ====//
 export function getExamList() {
     return function (dispatch) {
@@ -272,6 +292,7 @@ export function toggleCloseExam(examId) {
 
 export function deleteExam(examId) {
     return function (dispatch) {
+        dispatch(requestDeletingExam());
         return api({
             method: 'post',
             url: '/exam/delete',
@@ -289,11 +310,10 @@ export function deleteExam(examId) {
             .then(
                 json => {
                     if (json.error) {
-                        // dispatch(errorTogglingExam(json.error));
+                        dispatch(failedDeletingExam(json.error));
                     }
                     else {
-                        console.log("json", json);
-                        // dispatch(finishedTogglingExam(json));
+                        dispatch(finishedDeletingExam());
                         dispatch(reloadExams());
                     }
                 }
@@ -301,7 +321,7 @@ export function deleteExam(examId) {
             .catch(
                 error => {
                     console.log("caught error toggling exam", error);
-                    // dispatch(errorTogglingExam(error));
+                    dispatch(failedDeletingExam(error));
                 }
             )
     }
