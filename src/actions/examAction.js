@@ -400,6 +400,8 @@ function downloadSEBFile(examEntranceId, filename) {
     <string>INSERT_INSTANCE_SERVER_URL/?_id=INSERT_EXAM_ENTRANCE_ID</string>
     <key>sendBrowserExamKey</key>
     <true />
+    <key>browserViewMode</key>
+    <integer>1</integer>
   </dict>
 </plist>`;
     download(data.replace("INSERT_INSTANCE_SERVER_URL", config.INSTANCE_SERVER_URL).replace("INSERT_EXAM_ENTRANCE_ID", examEntranceId), `${filename}.seb`);
