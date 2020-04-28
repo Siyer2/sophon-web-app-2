@@ -76,7 +76,7 @@ function NavBar(props) {
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
             <a href={userExists() ? '/exams' : '/'} className="navbar-brand">
-                sophon
+                sophon <span class="badge badge-secondary">PILOT</span>
             </a>
 
             <NavBarHeading />
