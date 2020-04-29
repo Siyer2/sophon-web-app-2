@@ -15,17 +15,31 @@ function FrontPageBody(props) {
         event.preventDefault();
         props.enterExam(state.examCode, state.studentId);
     }
+
     function handleChangeText(event, name) {
         state[name] = event.target.value;
     }
 
+    function downloadApplicationClicked(platform) {
+        var url;
+        if (platform === 'mac') {
+            url = 'https://s3-ap-southeast-2.amazonaws.com/applications.optricom.com/SafeExamBrowser-2.1.5.dmg';
+        }
+        else if (platform === 'windows') {
+            url = 'https://s3-ap-southeast-2.amazonaws.com/applications.optricom.com/SafeExamBrowserInstaller.exe';
+        }
+
+        window.location.href = url;
+    }
+    
     return (
         <div className="container px-lg-5">
             <div className="row mx-lg-n5">
                 <div className="col py-3 px-lg-5 border bg-light">
                     <h3> Download Student Application </h3>
-                    <button type="button" className="btn btn-secondary" onClick={() => { window.location.href = 'https://s3-ap-southeast-2.amazonaws.com/applications.optricom.com/SafeExamBrowser-2.1.5.dmg'}}>Download Mac Application</button>
-                    <button type="button" className="btn btn-secondary">Download Windows Application</button>
+                    <p className="text-muted"> Sophon requires SafeExamBrowser Windows: 2.4 or greater, iOS: 2.1.16 or greater, Mac: 2.1.5pre2 or higher </p>
+                    <button type="button" className="btn btn-secondary" onClick={() => { downloadApplicationClicked('mac') }}>Download Mac Application</button>
+                    <button type="button" className="btn btn-secondary" onClick={() => { downloadApplicationClicked('windows') }}>Download Windows Application</button>
                 </div>
                 <div className="col py-3 px-lg-5 border bg-light">
                     <h3> Enter Exam </h3>
