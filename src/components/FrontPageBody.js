@@ -36,7 +36,7 @@ function FrontPageBody(props) {
             <div className="row mx-lg-n5">
                 <div className="col py-3 px-lg-5 border bg-light">
                     <h3> Download Student Application </h3>
-                    <p className="text-muted"> Sophon requires SafeExamBrowser Windows: 2.4 or greater, iOS: 2.1.16 or greater, Mac: 2.1.5pre2 or higher </p>
+                    {/* <p className="text-muted"> Sophon requires SafeExamBrowser Windows: 2.4 or greater, iOS: 2.1.16 or greater, Mac: 2.1.5pre2 or higher </p> */}
                     <button type="button" className="btn btn-secondary" onClick={() => { downloadApplicationClicked('mac') }}>Download Mac Application</button>
                     <button type="button" className="btn btn-secondary" onClick={() => { downloadApplicationClicked('windows') }}>Download Windows Application</button>
                 </div>
