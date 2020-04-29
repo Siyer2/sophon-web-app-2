@@ -6,7 +6,6 @@ import {
 } from 'react-bootstrap';
 
 import { enterExam } from '../actions/examAction';
-import fileDownload from 'js-file-download';
 
 var state = {};
 
