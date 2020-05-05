@@ -100,7 +100,7 @@ function NewExamModal(props) {
                             {applications}
                         </Form.Control>
                     </Form.Group>
-                    <Form.Group>
+                    {/* <Form.Group>
                         <Form.Label>Question Files</Form.Label>
                         <Form.File
                             id="custom-file"
@@ -112,7 +112,7 @@ function NewExamModal(props) {
                         <Form.Text className="text-muted">
                             Every student will have this file when they open the exam.
                         </Form.Text>
-                    </Form.Group>
+                    </Form.Group> */}
                     <Button variant="primary" type="submit">
                         Create Exam
                     </Button>
