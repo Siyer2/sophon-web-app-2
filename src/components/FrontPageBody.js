@@ -57,7 +57,7 @@ function FrontPageBody(props) {
                         </Button>
                         {props.exams.enteringExam ?
                         <Form.Text className="text-muted">
-                            This can take up to 3 minutes.
+                            This will take about 7 minutes.
                         </Form.Text>
                         :
                         props.exams.examEntranceId ? 

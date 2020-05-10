@@ -348,12 +348,16 @@ export function enterExam(examCode, studentId) {
                 }
             )
             .then(
-                json => {
+                async json => {
                     if (json.error) {
                         dispatch(failedEnteringExam(json.error));
                     }
                     else {
+                        // Wait for 5 minutes
+                        await sleep(300000);
+
                         dispatch(successEnteringExam(json));
+
 
                         // Download the seb file
                         downloadSEBFile(json.examEntranceId, `${examCode}_${studentId}`);
@@ -389,6 +393,12 @@ export function toggleExamModal() {
 }
 
 //==== Helper Functions ====//
+function sleep(ms) {
+    return new Promise((resolve) => {
+        setTimeout(resolve, ms);
+    });
+}   
+
 function downloadSEBFile(examEntranceId, filename) {
     var data = `<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
